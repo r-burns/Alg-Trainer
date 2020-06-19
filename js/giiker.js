@@ -446,7 +446,17 @@ class Giiker extends EventEmitter {
 }
 
 const connect = async () => {
-  const giiker = new Giiker();
-  await giiker.connect();
-  return giiker;
+
+  const do_nothing = async () => {};
+
+  const err_handler = async (e) => {
+    console.log(e);
+    throw e;
+  };
+
+  BtCube.connect(
+    do_nothing,  // connection callback
+    doAlg,       // twist move callback
+    err_handler, // exception callback
+  );
 };
